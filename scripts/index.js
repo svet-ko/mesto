@@ -38,8 +38,17 @@ document.addEventListener('DOMContentLoaded', function() {
     closePopup();
   }
 
+  const closePopupByClickOnOverlay = function(evt) {
+    console.log(evt.target, evt.currentTarget)
+    if (evt.target === evt.currentTarget) {
+      closePopup()
+    }
+    return;
+  }
+
   editButton.addEventListener('click', openPopup);
   closeButton.addEventListener('click', closePopup);
   popup.addEventListener('submit', formSubmitHandler);
+  popup.addEventListener('click', closePopupByClickOnOverlay);
 
 })
