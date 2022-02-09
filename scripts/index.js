@@ -1,9 +1,10 @@
 document.addEventListener('DOMContentLoaded', function() {
   const popup = document.querySelector('.popup');
+  const closeButton = popup.querySelector('.popup__close-button');
   const popupForm = popup.querySelector('.popup__form');
   const nameInput = popupForm.querySelector('.popup__form-item_type_name');
   const aboutInput = popupForm.querySelector('.popup__form-item_type_about');
-  const closeButton = popupForm.querySelector('.popup__close-button');
+
 
   const profileName = document.querySelector('.profile__user-name');
   const profileAbout = document.querySelector('.profile__user-about');
