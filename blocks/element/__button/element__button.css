@@ -7,6 +7,10 @@
   transition: background-image 200ms ease-in-out;
 }
 
+.element__button:hover {
+  opacity: .5;
+}
+
 .element__button:active {
   background-image: url("../../../images/heart-black.svg");
   opacity: 1;

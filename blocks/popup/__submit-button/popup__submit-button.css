@@ -8,6 +8,7 @@
   font-weight: 400;
   background-color: black;
   color: white;
+  border-radius: 2px;
 }
 
 .popup__submit-button:hover {

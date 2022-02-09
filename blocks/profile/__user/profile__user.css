@@ -1,4 +1,5 @@
 .profile__user {
+  max-width: 100%;
   margin: 0 0 7px 28px;
   display: flex;
   justify-content: center;
