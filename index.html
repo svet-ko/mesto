@@ -28,53 +28,6 @@
       </section>
       <section class="elements">
         <ul class="list elements__list">
-          <li class="element">
-            <img class="element__image" src="./images/tinified/element-pavlovsk_medium.jpg" alt="Вид Павловска">
-            <div class="element__content">
-              <h2 class="element__name">Павловск</h2>
-              <button type="button" class="button element__button" aria-label="Поставить оценку нравится"></button>
-            </div>
-          </li>
-
-          <li class="element">
-            <img class="element__image" src="./images/tinified/element-lomonosov-medium.jpg" alt="Вид Ораниенбаума">
-            <div class="element__content">
-              <h2 class="element__name">Ораниенбаум</h2>
-              <button type="button" class="button element__button" aria-label="Поставить оценку нравится"></button>
-            </div>
-          </li>
-
-          <li class="element">
-            <img class="element__image" src="./images/tinified/element-kronshtadt.jpg" alt="Вид Кронштадта">
-            <div class="element__content">
-              <h2 class="element__name">Кронштадт</h2>
-              <button type="button" class="button element__button" aria-label="Поставить оценку нравится"></button>
-            </div>
-          </li>
-
-          <li class="element">
-            <img class="element__image" src="./images/tinified/element-aleksandria-medium.jpg" alt="Вид Петергофа">
-            <div class="element__content">
-              <h2 class="element__name">Петергоф - парк Александрия</h2>
-              <button type="button" class="button element__button" aria-label="Поставить оценку нравится"></button>
-            </div>
-          </li>
-
-          <li class="element">
-            <img class="element__image" src="./images/tinified/element-gatchina-medium.jpg" alt="Вид Гатчины">
-            <div class="element__content">
-              <h2 class="element__name">Гатчина</h2>
-              <button type="button" class="button element__button" aria-label="Поставить оценку нравится"></button>
-            </div>
-          </li>
-
-          <li class="element">
-            <img class="element__image" src="./images/tinified/element-pushkin-medium.jpg" alt="Вид Пушкина">
-            <div class="element__content">
-              <h2 class="element__name">Пушкин</h2>
-              <button type="button" class="button element__button" aria-label="Поставить оценку нравится"></button>
-            </div>
-          </li>
         </ul>
       </section>
     </main>
@@ -82,7 +35,7 @@
       <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
     </footer>
 
-    <section class="popup popup_hidden">
+    <section class="popup popup_hidden popup_type_edit">
       <div class="popup__container">
         <button type="button" class="button popup__close-button" aria-label="Закрыть форму редактирования"></button>
         <h2 class="popup__heading">Редактировать профиль</h2>
@@ -93,7 +46,39 @@
         </form>
       </div>
     </section>
+
+    <section class="popup popup_hidden popup_type_add-place">
+      <div class="popup__container">
+        <button type="button" class="button popup__close-button" aria-label="Закрыть форму редактирования"></button>
+        <h2 class="popup__heading">Новое место</h2>
+        <form class="popup__form" name="form-add-place">
+            <input type="text" class="popup__form-item popup__form-item_type_place" name="place" placeholder="Название" required>
+            <input type="url" class="popup__form-item popup__form-item_type_url" name="url" placeholder="Ссылка на картинку">
+            <button type="submit" class="button popup__submit-button" aria-label="Создать новое место">Создать</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="popup popup_hidden popup_type_photo">
+      <div class="popup__photo-container">
+        <button type="button" class="button popup__close-button" aria-label="Закрыть форму редактирования"></button>
+        <img src="#" class="popup__image">
+        <p class="popup__caption"></p>
+      </div>
+    </section>
   </div>
+
+  <template id="element-template">
+    <li class="element">
+      <button type="button" class="button element__delete-button"></button>
+      <img src="#" class="element__image">
+      <div class="element__content">
+        <h2 class="element__name"></h2>
+        <button type="button" class="button element__like-button" aria-label="Поставить оценку нравится"></button>
+      </div>
+    </li>
+  </template>
+
   <script src="./scripts/index.js"></script>
 </body>
 </html>
