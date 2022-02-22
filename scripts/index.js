@@ -75,20 +75,12 @@ document.addEventListener('DOMContentLoaded', function() {
     initialCards.reverse().forEach((element) => addElementToElementsList(element));
   }
 
-  function addHidden(popup) {
-    popup.classList.add('popup_hidden');
-  }
-
   function openPopup(popup) {
-    popup.classList.remove('popup_hidden');
-    popup.classList.remove('popup_fade');
     popup.classList.add('popup_opened');
   }
 
   function closePopup(popup) {
     popup.classList.remove('popup_opened');
-    popup.classList.add('popup_fade');
-    setTimeout(() => addHidden(popup), 355);
   }
 
   function closePopupByClickOnOverlay(evt, popup) {
