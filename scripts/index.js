@@ -1,3 +1,5 @@
+import { enableValidation, checkInputValidity, toggleButtonState } from './valid.js';
+
 document.addEventListener('DOMContentLoaded', function() {
 
   const elementsList = document.querySelector('.elements__list');
@@ -76,10 +78,12 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function openPopup(popup) {
+    console.log("openPopup!!!!");
     popup.classList.add('popup_opened');
   }
 
   function closePopup(popup) {
+    console.log("closePopup!!!!");
     popup.classList.remove('popup_opened');
   }
 
@@ -91,10 +95,13 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function addEditPopupEventsListneners(){
+    console.log("addEditPopupEventsListneners!!!!");
     const profileCloseButton = popupEdit.querySelector('.popup__close-button');
     const profileForm = popupEdit.querySelector('.form');
+    const profileInputList = Array.from(profileForm.querySelectorAll('.form__input'));
     const nameInput = profileForm.querySelector('.form__input_type_name');
     const aboutInput = profileForm.querySelector('.form__input_type_about');
+    const submitProfileButton = profileForm.querySelector('.form__submit-button');
 
     const profileName = document.querySelector('.profile__user-name');
     const profileAbout = document.querySelector('.profile__user-about');
@@ -107,21 +114,31 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function handleEditFormSubmit(evt) {
       evt.preventDefault();
+      console.log("handleEditFormSubmit!!!!");
       profileName.textContent = nameInput.value;
       profileAbout.textContent = aboutInput.value;
     }
 
-    editButton.addEventListener('click', () => {openPopup(popupEdit); putValue()});
+    editButton.addEventListener('click', () => {
+      openPopup(popupEdit);
+      putValue();
+      profileInputList.forEach((input) => checkInputValidity(profileForm, input));
+      toggleButtonState(profileInputList, submitProfileButton);
+    });
+
     profileCloseButton.addEventListener('click', () => closePopup(popupEdit));
     popupEdit.addEventListener('submit', (evt) => {handleEditFormSubmit(evt); closePopup(popupEdit)});
     popupEdit.addEventListener('click', (evt) => closePopupByClickOnOverlay(evt, popupEdit));
   }
 
   function addPlacePopupEventsListneners() {
+    console.log("addPlacePopupEventsListneners!!!!");
     const placePopupCloseButton = popupAddPlace.querySelector('.popup__close-button');
-    const cardForm = popupAddPlace.querySelector('.popup__form');
-    const placeInput = cardForm.querySelector('.popup__form-item_type_place');
-    const urlInput = cardForm.querySelector('.popup__form-item_type_url');
+    const cardForm = popupAddPlace.querySelector('.form');
+    const cardInputList = Array.from(cardForm.querySelectorAll('.form__input'));
+    const placeInput = cardForm.querySelector('.form__input_type_place');
+    const urlInput = cardForm.querySelector('.form__input_type_url');
+    const submitCardButton = cardForm.querySelector('.form__submit-button');
 
     const addButton = document.querySelector('.profile__add-button');
 
@@ -139,7 +156,10 @@ document.addEventListener('DOMContentLoaded', function() {
       cardForm.reset();
     }
 
-    addButton.addEventListener('click', () => openPopup(popupAddPlace));
+    addButton.addEventListener('click', () => {
+      openPopup(popupAddPlace);
+      toggleButtonState(cardInputList, submitCardButton);
+    });
     placePopupCloseButton.addEventListener('click', () => closePopup(popupAddPlace));
     popupAddPlace.addEventListener('submit', (evt) => {handleCardFormSubmit(evt); closePopup(popupAddPlace)});
     popupAddPlace.addEventListener('click', (evt) => closePopupByClickOnOverlay(evt, popupAddPlace));
@@ -154,4 +174,5 @@ document.addEventListener('DOMContentLoaded', function() {
   addEditPopupEventsListneners();
   addPlacePopupEventsListneners();
   addImagePopupEventsListeners();
+  enableValidation();
 })

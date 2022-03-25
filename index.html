@@ -19,7 +19,7 @@
           <img class="profile__avatar" src="./images/ekaterina.jpg" alt="Аватар пользователя">
           <div class="profile__info">
             <div class="profile__user">
-              <h1 class="profile__user-name">Екатерина II, Императрица и Самодержица Всероссийская</h1>
+              <h1 class="profile__user-name">Екатерина II, Императрица</h1>
               <button type="button" class="button profile__edit-button" aria-label="Редактировать"></button>
             </div>
             <p class="profile__user-about">Ее Императорское Величество Самодержица Всероссийская</p>
@@ -40,14 +40,14 @@
       <div class="popup__container">
         <button type="button" class="button popup__close-button" aria-label="Закрыть форму редактирования"></button>
         <h2 class="popup__heading">Редактировать профиль</h2>
-        <form class="popup__form form" name="form-edit" novalidate>
+        <form class="form form_type_edit" name="form-edit" novalidate>
           <fieldset class="form__set">
             <label class="form__field">
-              <input type="text" class="form__input form__input_type_name" id="name-input" name="name" placeholder="Имя" minlength="2" maxlength="40" required>
+              <input type="text" class="form__input form__input_type_name" id="name" name="name-input" placeholder="Имя" minlength="2" maxlength="40" required>
               <span class="form__input-error form__input-error_type_name"></span>
             </label>
             <label class="form__field">
-              <input type="text" class="form__input form__input_type_about" id="about-input" name="about" placeholder="О себе" minlength="2" maxlength="200" required>
+              <input type="text" class="form__input form__input_type_about" id="about" name="about-input" placeholder="О себе" minlength="2" maxlength="200" required>
               <span class="form__input-error form__input-error_type_about"></span>
             </label>
           </fieldset>
@@ -60,10 +60,18 @@
       <div class="popup__container">
         <button type="button" class="button popup__close-button" aria-label="Закрыть форму"></button>
         <h2 class="popup__heading">Новое место</h2>
-        <form class="popup__form" name="form-add-place" novalidate>
-            <input type="text" class="popup__form-item popup__form-item_type_place" name="place" placeholder="Название" required>
-            <input type="url" class="popup__form-item popup__form-item_type_url" name="url" placeholder="Ссылка на картинку" required>
-            <button type="submit" class="button popup__submit-button" aria-label="Создать новое место">Создать</button>
+        <form class="form form_type_place" name="place" novalidate>
+          <fieldset class="form__set">
+            <label class="form__field">
+              <input type="text" class="form__input form__input_type_place" id="place" name="place-input" placeholder="Название" minlength="2" maxlength="30" required>
+              <span class="form__input-error form__input-error_type_place"></span>
+            </label>
+            <label class="form__field">
+              <input type="url" class="form__input form__input_type_url" id="url" name="url-input" placeholder="Ссылка на картинку" required>
+              <span class="form__input-error form__input-error_type_url"></span>
+            </label>
+          </fieldset>
+            <button type="submit" class="button form__submit-button" aria-label="Создать новое место">Создать</button>
         </form>
       </div>
     </section>
@@ -88,6 +96,7 @@
     </li>
   </template>
 
-  <script src="./scripts/index.js"></script>
+  <script src="./scripts/index.js" type="module"></script>
+  <script src="./scripts/valid.js" type="module"></script>
 </body>
 </html>
