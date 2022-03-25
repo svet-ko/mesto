@@ -92,9 +92,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function addEditPopupEventsListneners(){
     const profileCloseButton = popupEdit.querySelector('.popup__close-button');
-    const profileForm = popupEdit.querySelector('.popup__form');
-    const nameInput = profileForm.querySelector('.popup__form-item_type_name');
-    const aboutInput = profileForm.querySelector('.popup__form-item_type_about');
+    const profileForm = popupEdit.querySelector('.form');
+    const nameInput = profileForm.querySelector('.form__input_type_name');
+    const aboutInput = profileForm.querySelector('.form__input_type_about');
 
     const profileName = document.querySelector('.profile__user-name');
     const profileAbout = document.querySelector('.profile__user-about');
