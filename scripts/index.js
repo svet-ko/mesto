@@ -1,4 +1,4 @@
-import { enableValidation, checkInputValidity, toggleButtonState } from './valid.js';
+import { enableValidation, checkInputValidity, toggleButtonState, validationStates } from './valid.js';
 
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -126,8 +126,8 @@ document.addEventListener('DOMContentLoaded', function() {
     editButton.addEventListener('click', () => {
       openPopup(popupEdit);
       putValue();
-      profileInputList.forEach((input) => checkInputValidity(profileForm, input));
-      toggleButtonState(profileInputList, submitProfileButton);
+      profileInputList.forEach((input) => checkInputValidity(profileForm, input, validationStates));
+      toggleButtonState(profileInputList, submitProfileButton, validationStates);
     });
 
     profileCloseButton.addEventListener('click', () => closePopup(popupEdit));
@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     addButton.addEventListener('click', () => {
       openPopup(popupAddPlace);
-      toggleButtonState(cardInputList, submitCardButton);
+      toggleButtonState(cardInputList, submitCardButton, validationStates);
     });
     placePopupCloseButton.addEventListener('click', () => closePopup(popupAddPlace));
     popupAddPlace.addEventListener('submit', (evt) => {handleCardFormSubmit(evt); closePopup(popupAddPlace)});
@@ -181,5 +181,5 @@ document.addEventListener('DOMContentLoaded', function() {
   addEditPopupEventsListneners();
   addPlacePopupEventsListneners();
   addImagePopupEventsListeners();
-  enableValidation();
+  enableValidation(validationStates);
 })
