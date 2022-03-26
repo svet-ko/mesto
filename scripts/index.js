@@ -174,6 +174,7 @@ document.addEventListener('DOMContentLoaded', function() {
   function addImagePopupEventsListeners() {
     const imageCloseButton = popupImageContainer.querySelector('.popup__close-button');
     imageCloseButton.addEventListener('click', () => closePopup(popupImageContainer));
+    document.addEventListener('keydown', (evt) => closePopupByEsc(evt, popupImageContainer));
   }
 
   addElementsFromInitialArray();
