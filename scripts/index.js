@@ -1,8 +1,6 @@
-import { enableValidation, checkInputValidity, toggleButtonState, validationStates } from './valid.js';
-
 document.addEventListener('DOMContentLoaded', function() {
 
-  const elementsList = document.querySelector('.elements__list');
+  const cardsContainer = document.querySelector('.elements__list');
   const initialCards = [
     {
       name: 'Павловск',
@@ -37,12 +35,13 @@ document.addEventListener('DOMContentLoaded', function() {
   const popupCaption = popupImageContainer.querySelector('.popup__caption');
 
   function createCard(element) {
-    const cardTemplate = document.querySelector('#element-template').content;
+    const elementTemplate = document.querySelector('#element-template');
+    const cardTemplate = elementTemplate.content;
     const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
     const cardElementName = cardElement.querySelector('.element__name');
     const cardElementImage = cardElement.querySelector('.element__image');
     const likeButton = cardElement.querySelector('.element__like-button');
-    const removeButton = cardElement.querySelector('.element__delete-button');
+    const trashButton = cardElement.querySelector('.element__delete-button');
 
     cardElementName.textContent = element.name;
     cardElementImage.src = element.link;
@@ -64,13 +63,13 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     likeButton.addEventListener('click', toggleLike);
-    removeButton.addEventListener('click', (evt) => removeButtonHandler(evt));
+    trashButton.addEventListener('click', (evt) => removeButtonHandler(evt));
     return cardElement;
   }
 
   function addElementToElementsList(element) {
     const cardElement = createCard(element);
-    elementsList.prepend(cardElement);
+    cardsContainer.prepend(cardElement);
   }
 
   function addElementsFromInitialArray() {
@@ -125,12 +124,7 @@ document.addEventListener('DOMContentLoaded', function() {
       profileAbout.textContent = aboutInput.value;
     }
 
-    editButton.addEventListener('click', () => {
-      openPopup(popupEdit);
-      putValue();
-      profileInputList.forEach((input) => checkInputValidity(profileForm, input, validationStates));
-      toggleButtonState(profileInputList, submitProfileButton, validationStates);
-    });
+    editButton.addEventListener('click', () => {openPopup(popupEdit); putValue();});
 
     profileCloseButton.addEventListener('click', () => closePopup(popupEdit));
     popupEdit.addEventListener('submit', (evt) => {handleEditFormSubmit(evt); closePopup(popupEdit)});
@@ -138,7 +132,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function addPlacePopupEventsListneners() {
-    console.log("addPlacePopupEventsListneners!!!!");
     const placePopupCloseButton = popupAddPlace.querySelector('.popup__close-button');
     const cardForm = popupAddPlace.querySelector('.form');
     const cardInputList = Array.from(cardForm.querySelectorAll('.form__input'));
@@ -162,10 +155,7 @@ document.addEventListener('DOMContentLoaded', function() {
       cardForm.reset();
     }
 
-    addButton.addEventListener('click', () => {
-      openPopup(popupAddPlace);
-      toggleButtonState(cardInputList, submitCardButton, validationStates);
-    });
+    addButton.addEventListener('click', () => openPopup(popupAddPlace));
     placePopupCloseButton.addEventListener('click', () => closePopup(popupAddPlace));
     popupAddPlace.addEventListener('submit', (evt) => {handleCardFormSubmit(evt); closePopup(popupAddPlace)});
     popupAddPlace.addEventListener('click', (evt) => closePopupByClickOnOverlay(evt, popupAddPlace));
@@ -174,11 +164,11 @@ document.addEventListener('DOMContentLoaded', function() {
   function addImagePopupEventsListeners() {
     const imageCloseButton = popupImageContainer.querySelector('.popup__close-button');
     imageCloseButton.addEventListener('click', () => closePopup(popupImageContainer));
+    popupImageContainer.addEventListener('click', (evt) => closePopupByClickOnOverlay(evt, popupImageContainer));
   }
 
   addElementsFromInitialArray();
   addEditPopupEventsListneners();
   addPlacePopupEventsListneners();
   addImagePopupEventsListeners();
-  enableValidation(validationStates);
 })
