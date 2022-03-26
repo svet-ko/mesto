@@ -7,25 +7,24 @@ export const validationStates = {
   errorClass: 'form__input-error_visible'
 }
 
-function showInputError(formElement, inputElement, errorMessage, validObj) {
-  const errorElement = formElement.querySelector(`.form__input-error_type_${inputElement.id}`);
+function showInputError(errorElement, inputElement, errorMessage, validObj) {
   inputElement.classList.add(validObj.inputErrorClass);
   errorElement.classList.add(validObj.errorClass);
   errorElement.textContent = errorMessage;
 };
 
-function hideInputError(formElement, inputElement, validObj) {
-  const errorElement = formElement.querySelector(`.form__input-error_type_${inputElement.id}`);
+function hideInputError(errorElement, inputElement, validObj) {
   inputElement.classList.remove(validObj.inputErrorClass);
   errorElement.classList.remove(validObj.errorClass);
   errorElement.textContent = '';
 };
 
 export function checkInputValidity(formElement, inputElement, validObj) {
+  const errorElement = formElement.querySelector(`.form__input-error_type_${inputElement.id}`);
   if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage, validObj);
+    showInputError(errorElement, inputElement, inputElement.validationMessage, validObj);
   } else {
-    hideInputError(formElement, inputElement, validObj);
+    hideInputError(errorElement, inputElement, validObj);
   }
 };
 
