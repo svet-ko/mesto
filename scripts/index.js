@@ -79,10 +79,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function openPopup(popup) {
     popup.classList.add('popup_opened');
+    document.addEventListener('keydown', closePopupByEsc(popup));
   }
 
   function closePopup(popup) {
     popup.classList.remove('popup_opened');
+    document.removeEventListener('keydown', closePopupByEsc(popup));
   }
 
   function closePopupByClickOnOverlay(evt, popup) {
@@ -92,14 +94,15 @@ document.addEventListener('DOMContentLoaded', function() {
     return;
   }
 
-  function closePopupByEsc(evt, popup) {
-    if (evt.key === 'Escape') {
-      closePopup(popup);
-    };
+  function closePopupByEsc(popup) {
+    return (evt) => {
+        if (evt.key === 'Escape') {
+        closePopup(popup);
+      };
+    }
   }
 
   function addEditPopupEventsListneners(){
-    console.log("addEditPopupEventsListneners!!!!");
     const profileCloseButton = popupEdit.querySelector('.popup__close-button');
     const profileForm = popupEdit.querySelector('.form');
     const profileInputList = Array.from(profileForm.querySelectorAll('.form__input'));
@@ -118,7 +121,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function handleEditFormSubmit(evt) {
       evt.preventDefault();
-      console.log("handleEditFormSubmit!!!!");
       profileName.textContent = nameInput.value;
       profileAbout.textContent = aboutInput.value;
     }
@@ -133,7 +135,6 @@ document.addEventListener('DOMContentLoaded', function() {
     profileCloseButton.addEventListener('click', () => closePopup(popupEdit));
     popupEdit.addEventListener('submit', (evt) => {handleEditFormSubmit(evt); closePopup(popupEdit)});
     popupEdit.addEventListener('click', (evt) => closePopupByClickOnOverlay(evt, popupEdit));
-    document.addEventListener('keydown', (evt) => closePopupByEsc(evt, popupEdit));
   }
 
   function addPlacePopupEventsListneners() {
@@ -168,13 +169,11 @@ document.addEventListener('DOMContentLoaded', function() {
     placePopupCloseButton.addEventListener('click', () => closePopup(popupAddPlace));
     popupAddPlace.addEventListener('submit', (evt) => {handleCardFormSubmit(evt); closePopup(popupAddPlace)});
     popupAddPlace.addEventListener('click', (evt) => closePopupByClickOnOverlay(evt, popupAddPlace));
-    document.addEventListener('keydown', (evt) => closePopupByEsc(evt, popupAddPlace));
   }
 
   function addImagePopupEventsListeners() {
     const imageCloseButton = popupImageContainer.querySelector('.popup__close-button');
     imageCloseButton.addEventListener('click', () => closePopup(popupImageContainer));
-    document.addEventListener('keydown', (evt) => closePopupByEsc(evt, popupImageContainer));
   }
 
   addElementsFromInitialArray();
