@@ -34,8 +34,9 @@ document.addEventListener('DOMContentLoaded', function() {
   const popupImage = popupImageContainer.querySelector('.popup__image');
   const popupCaption = popupImageContainer.querySelector('.popup__caption');
 
+  const elementTemplate = document.querySelector('#element-template');
+
   function createCard(element) {
-    const elementTemplate = document.querySelector('#element-template');
     const cardTemplate = elementTemplate.content;
     const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
     const cardElementName = cardElement.querySelector('.element__name');
@@ -131,12 +132,10 @@ document.addEventListener('DOMContentLoaded', function() {
   function addPlacePopupEventsListneners() {
     const placePopupCloseButton = popupAddPlace.querySelector('.popup__close-button');
     const cardForm = popupAddPlace.querySelector('.form');
-    const cardInputList = Array.from(cardForm.querySelectorAll('.form__input'));
     const placeInput = cardForm.querySelector('.form__input_type_place');
     const urlInput = cardForm.querySelector('.form__input_type_url');
-    const submitCardButton = cardForm.querySelector('.form__submit-button');
 
-    const addButton = document.querySelector('.profile__add-button');
+    const plusButton = document.querySelector('.profile__add-button');
 
     function createElement() {
       const element = {};
@@ -152,7 +151,7 @@ document.addEventListener('DOMContentLoaded', function() {
       cardForm.reset();
     }
 
-    addButton.addEventListener('click', () => openPopup(popupAddPlace));
+    plusButton.addEventListener('click', () => openPopup(popupAddPlace));
     placePopupCloseButton.addEventListener('click', () => closePopup(popupAddPlace));
     popupAddPlace.addEventListener('submit', (evt) => {handleCardFormSubmit(evt); closePopup(popupAddPlace)});
     popupAddPlace.addEventListener('click', (evt) => closePopupByClickOnOverlay(evt));
