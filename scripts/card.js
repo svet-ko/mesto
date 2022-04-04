@@ -2,44 +2,45 @@ import { openPopup, popupImageContainer, popupCaption, popupImage } from './inde
 
 class Card {
   constructor(cardElementTemplate, element) {
-    this.cardTemplate = cardElementTemplate.content;
-    this.cardElement = this.cardTemplate.querySelector('.element').cloneNode(true);
-    this.cardElementName = this.cardElement.querySelector('.element__name');
-    this.cardElementImage = this.cardElement.querySelector('.element__image');
-    this.likeButton = this.cardElement.querySelector('.element__like-button');
-    this.trashButton = this.cardElement.querySelector('.element__delete-button');
+    this._cardTemplate = cardElementTemplate.content;
+    this._cardElement = this._cardTemplate.querySelector('.element').cloneNode(true);
+    this._cardElementName = this._cardElement.querySelector('.element__name');
+    this._cardElementImage = this._cardElement.querySelector('.element__image');
+    this._likeButton = this._cardElement.querySelector('.element__like-button');
+    this._trashButton = this._cardElement.querySelector('.element__delete-button');
 
-    this.cardElementName.textContent = element.name;
-    this.cardElementImage.src = element.link;
-    this.cardElementImage.alt = `Картинка "${element.name}"`;
+    this._cardElementName.textContent = element.name;
+    this._cardElementImage.src = element.link;
+    this._cardElementImage.alt = `Картинка "${element.name}"`;
   }
 
   _toggleLike() {
-    this.likeButton.classList.toggle('element__like-button_active');
+    this._likeButton.classList.toggle('element__like-button_active');
   }
 
   _removeButtonHandler(evt) {
-    this.cardElement.remove();
+    this._cardElement.remove();
+    this._cardElement = '';
   }
 
   _addCardPopupOpener() {
-    this.cardElementImage.addEventListener('click', () => {
-      popupImage.src = this.cardElementImage.src;
-      popupImage.alt = `Картинка "${this.cardElementName.textContent}"`;
-      popupCaption.textContent = this.cardElementName.textContent;
+    this._cardElementImage.addEventListener('click', () => {
+      popupImage.src = this._cardElementImage.src;
+      popupImage.alt = `Картинка "${this._cardElementName.textContent}"`;
+      popupCaption.textContent = this._cardElementName.textContent;
       openPopup(popupImageContainer);
   });
   }
 
   _addCardEventListeners() {
     this._addCardPopupOpener();
-    this.likeButton.addEventListener('click', () => {this._toggleLike()});
-    this.trashButton.addEventListener('click', (evt) => this._removeButtonHandler(evt));
+    this._likeButton.addEventListener('click', () => {this._toggleLike()});
+    this._trashButton.addEventListener('click', (evt) => this._removeButtonHandler(evt));
   }
 
-  getCard(popup) {
-    this._addCardEventListeners(popup);
-    return this.cardElement;
+  getCard() {
+    this._addCardEventListeners();
+    return this._cardElement;
   }
 
 }

@@ -1,7 +1,8 @@
 class FormValidator {
   constructor(validConfig, formElement) {
     this.validConfig = validConfig,
-    this.formElement = formElement
+    this.formElement = formElement;
+    this.hasSetEvents = false;
   }
 
   _showInputError(inputElement, errorMessage) {
@@ -26,9 +27,7 @@ class FormValidator {
     }
   };
 
-  _setEventListeners() {
-    const inputList = Array.from(this.formElement.querySelectorAll(this.validConfig.inputSelector));
-    const buttonElement = this.formElement.querySelector(this.validConfig.submitButtonSelector);
+  _setEventListeners(inputList, buttonElement) {
     this._toggleButtonState(inputList, buttonElement);
     inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
@@ -36,13 +35,20 @@ class FormValidator {
         this._toggleButtonState(inputList, buttonElement);
       });
     });
+    this.hasSetEvents = true;
   };
 
   enableValidation() {
-    this.formElement.addEventListener('submit', function (evt) {
-      evt.preventDefault();
-    });
-    this._setEventListeners();
+    const inputList = Array.from(this.formElement.querySelectorAll(this.validConfig.inputSelector));
+    const buttonElement = this.formElement.querySelector(this.validConfig.submitButtonSelector);
+    if (!this.hasSetEvents) {
+      this.formElement.addEventListener('submit', function (evt) {
+        evt.preventDefault();
+      });
+      this._setEventListeners(inputList, buttonElement);
+    } else {
+      this._toggleButtonState(inputList, buttonElement);
+    }
   };
 
   _hasInvalidInput(inputList) {
