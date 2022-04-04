@@ -1,3 +1,5 @@
+import { FormValidator } from './FormValidator.js'
+
 document.addEventListener('DOMContentLoaded', function() {
 
   const cardsContainer = document.querySelector('.elements__list');
@@ -35,6 +37,15 @@ document.addEventListener('DOMContentLoaded', function() {
   const popupCaption = popupImageContainer.querySelector('.popup__caption');
 
   const elementTemplate = document.querySelector('#element-template');
+
+  const validationStates = {
+    formSelector: '.form',
+    inputSelector: '.form__input',
+    submitButtonSelector: '.form__submit-button',
+    inactiveButtonClass: 'form__submit-button_inactive',
+    inputErrorClass: 'form__input_invalid',
+    errorClass: 'form__input-error_visible'
+  }
 
   function createCard(element) {
     const cardTemplate = elementTemplate.content;
@@ -104,6 +115,8 @@ document.addEventListener('DOMContentLoaded', function() {
   function addEditPopupEventsListneners(){
     const profileCloseButton = popupEdit.querySelector('.popup__close-button');
     const profileForm = popupEdit.querySelector('.form');
+    const ProfileValidator = new FormValidator(validationStates, profileForm);
+    ProfileValidator.enableValidation();
     const nameInput = profileForm.querySelector('.form__input_type_name');
     const aboutInput = profileForm.querySelector('.form__input_type_about');
 
@@ -132,6 +145,8 @@ document.addEventListener('DOMContentLoaded', function() {
   function addPlacePopupEventsListneners() {
     const placePopupCloseButton = popupAddPlace.querySelector('.popup__close-button');
     const cardForm = popupAddPlace.querySelector('.form');
+    const CardValidator = new FormValidator(validationStates, cardForm);
+    CardValidator.enableValidation();
     const placeInput = cardForm.querySelector('.form__input_type_place');
     const urlInput = cardForm.querySelector('.form__input_type_url');
 
