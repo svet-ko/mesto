@@ -1,3 +1,4 @@
+import { popupImageContainer, openPopup, closePopup, closePopupByClickOnOverlay } from './utils.js'
 import { FormValidator } from './FormValidator.js'
 import { Card } from './card.js'
 
@@ -30,11 +31,7 @@ const initialCards = [
 ];
 
 const popupAddPlace = document.querySelector('.popup_type_add-place');
-const popupImageContainer = document.querySelector('.popup_type_photo');
 const popupEdit = document.querySelector('.popup_type_edit');
-const popupCaption = popupImageContainer.querySelector('.popup__caption');
-const popupImage = popupImageContainer.querySelector('.popup__image');
-
 
 const elementTemplate = document.querySelector('#element-template');
 
@@ -55,31 +52,6 @@ function addElementToElementsList(element) {
 function addElementsFromInitialArray() {
   initialCards.reverse().forEach((element) => addElementToElementsList(element));
 }
-
-function openPopup(popup) {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keydown', closeByEsc);
-}
-
-function closePopup(popup) {
-  popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closeByEsc)
-}
-
-function closePopupByClickOnOverlay(evt) {
-  if (evt.target === evt.currentTarget) {
-    closePopup(evt.target);
-  }
-  return;
-}
-
-function closeByEsc(evt) {
-  if (evt.key === 'Escape') {
-    const openedPopup = document.querySelector('.popup_opened');
-    closePopup(openedPopup);
-  }
-}
-
 
 const profileCloseButton = popupEdit.querySelector('.popup__close-button');
 const profileForm = popupEdit.querySelector('.form');
@@ -146,6 +118,3 @@ popupImageContainer.addEventListener('click', (evt) => closePopupByClickOnOverla
 
 
 addElementsFromInitialArray();
-
-
-export {openPopup, popupImageContainer, popupCaption, popupImage}
