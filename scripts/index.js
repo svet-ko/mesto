@@ -1,48 +1,14 @@
-import { popupImageContainer, openPopup, closePopup, closePopupByClickOnOverlay } from './utils.js'
+import { initialCards, validationStates, popupImageContainer } from './utils.js'
 import { FormValidator } from './FormValidator.js'
 import { Card } from './card.js'
+import PopupWithForm from './PopupWithForm.js';
 
 const cardsContainer = document.querySelector('.elements__list');
-const initialCards = [
-  {
-    name: 'Павловск',
-    link: './images/tinified/element-pavlovsk_medium.jpg'
-  },
-  {
-    name: 'Ораниенбаум',
-    link: './images/tinified/element-lomonosov-medium.jpg'
-  },
-  {
-    name: 'Кронштадт',
-    link: './images/tinified/element-kronshtadt.jpg'
-  },
-  {
-    name: 'Петергоф - парк Александрия',
-    link: './images/tinified/element-aleksandria-medium.jpg'
-  },
-  {
-    name: 'Гатчина',
-    link: './images/tinified/element-gatchina-medium.jpg'
-  },
-  {
-    name: 'Пушкин',
-    link: './images/tinified/element-pushkin-medium.jpg'
-  },
-];
 
 const popupAddPlace = document.querySelector('.popup_type_add-place');
 const popupEdit = document.querySelector('.popup_type_edit');
 
 const elementTemplate = document.querySelector('#element-template');
-
-const validationStates = {
-  formSelector: '.form',
-  inputSelector: '.form__input',
-  submitButtonSelector: '.form__submit-button',
-  inactiveButtonClass: 'form__submit-button_inactive',
-  inputErrorClass: 'form__input_invalid',
-  errorClass: 'form__input-error_visible'
-}
 
 function addElementToElementsList(element) {
   const cardElement = new Card(elementTemplate, element);
@@ -69,17 +35,16 @@ function putValue() {
   aboutInput.value = profileAbout.textContent;
 };
 
-function handleEditFormSubmit(evt) {
+function handleEditFormSubmit(evt, getInputs) {
   evt.preventDefault();
-  profileName.textContent = nameInput.value;
-  profileAbout.textContent = aboutInput.value;
+  const [name, about] = getInputs();
+  profileName.textContent = name.value;
+  profileAbout.textContent = about.value;
 }
 
-editButton.addEventListener('click', () => {openPopup(popupEdit); putValue();});
-
-profileCloseButton.addEventListener('click', () => closePopup(popupEdit));
-popupEdit.addEventListener('submit', (evt) => {handleEditFormSubmit(evt); closePopup(popupEdit)});
-popupEdit.addEventListener('click', (evt) => closePopupByClickOnOverlay(evt));
+const editPopupWithFormItem = new PopupWithForm(popupEdit, handleEditFormSubmit);
+editPopupWithFormItem.setEventListeners();
+editButton.addEventListener('click', () => {editPopupWithFormItem.openPopup(); putValue();});
 
 
 const placePopupCloseButton = popupAddPlace.querySelector('.popup__close-button');
@@ -102,19 +67,12 @@ function handleCardFormSubmit(evt) {
   evt.preventDefault();
   const newElement = createElement();
   addElementToElementsList(newElement);
-  cardForm.reset();
 }
 
-plusButton.addEventListener('click', () => {cardValidator.enableValidation(); openPopup(popupAddPlace)});
-placePopupCloseButton.addEventListener('click', () => closePopup(popupAddPlace));
-popupAddPlace.addEventListener('submit', (evt) => {handleCardFormSubmit(evt); closePopup(popupAddPlace)});
-popupAddPlace.addEventListener('click', (evt) => closePopupByClickOnOverlay(evt));
-
-
-
-const imageCloseButton = popupImageContainer.querySelector('.popup__close-button');
-imageCloseButton.addEventListener('click', () => closePopup(popupImageContainer));
-popupImageContainer.addEventListener('click', (evt) => closePopupByClickOnOverlay(evt));
+//plusButton.addEventListener('click', () => {cardValidator.enableValidation(); openPopup(popupAddPlace)});
+//placePopupCloseButton.addEventListener('click', () => closePopup(popupAddPlace));
+//popupAddPlace.addEventListener('submit', (evt) => {handleCardFormSubmit(evt); closePopup(popupAddPlace)});
+//popupAddPlace.addEventListener('click', (evt) => closePopupByClickOnOverlay(evt));
 
 
 addElementsFromInitialArray();

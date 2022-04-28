@@ -1,4 +1,5 @@
-import { openPopup, popupImageContainer, popupCaption, popupImage } from './utils.js'
+import { popupImageContainer } from './utils.js'
+import PopupWithImage from './PopupWithImage.js'
 
 class Card {
   constructor(cardElementTemplate, element) {
@@ -25,10 +26,9 @@ class Card {
 
   _addCardPopupOpener() {
     this._cardElementImage.addEventListener('click', () => {
-      popupImage.src = this._cardElementImage.src;
-      popupImage.alt = `Картинка "${this._cardElementName.textContent}"`;
-      popupCaption.textContent = this._cardElementName.textContent;
-      openPopup(popupImageContainer);
+      const imagePopupItem = new PopupWithImage(popupImageContainer);
+      imagePopupItem.openPopup(this._cardElementImage, this._cardElementName);
+      imagePopupItem.setEventListeners();
   });
   }
 
