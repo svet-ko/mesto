@@ -1,5 +1,3 @@
-import { popupImageContainer } from './utils.js'
-import PopupWithImage from './PopupWithImage.js'
 
 class Card {
   constructor(cardElementTemplate, element, handleCardClick) {
