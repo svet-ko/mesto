@@ -1,27 +1,34 @@
+const Pavlovsk = new URL('../images/tinified/element-pavlovsk_medium.jpg', import.meta.url);
+const Oranienbaum = new URL('../images/tinified/element-lomonosov-medium.jpg', import.meta.url);
+const Kronstadt = new URL('../images/tinified/element-kronshtadt.jpg', import.meta.url);
+const Petergof = new URL('../images/tinified/element-aleksandria-medium.jpg', import.meta.url);
+const Gatchina = new URL('../images/tinified/element-gatchina-medium.jpg', import.meta.url);
+const Pushkin = new URL('../images/tinified/element-pushkin-medium.jpg', import.meta.url);
+
 const initialCards = [
   {
     name: 'Павловск',
-    link: './images/tinified/element-pavlovsk_medium.jpg'
+    link: Pavlovsk
   },
   {
     name: 'Ораниенбаум',
-    link: './images/tinified/element-lomonosov-medium.jpg'
+    link: Oranienbaum
   },
   {
     name: 'Кронштадт',
-    link: './images/tinified/element-kronshtadt.jpg'
+    link: Kronstadt
   },
   {
     name: 'Петергоф - парк Александрия',
-    link: './images/tinified/element-aleksandria-medium.jpg'
+    link: Petergof
   },
   {
     name: 'Гатчина',
-    link: './images/tinified/element-gatchina-medium.jpg'
+    link: Gatchina
   },
   {
     name: 'Пушкин',
-    link: './images/tinified/element-pushkin-medium.jpg'
+    link: Pushkin
   },
 ];
 

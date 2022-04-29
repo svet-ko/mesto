@@ -14,6 +14,7 @@ import { Card } from './card.js';
 import Section from './Section.js';
 import PopupWithForm from './PopupWithForm.js';
 import UserInfo from './UserInfo.js';
+import '../pages/index.css';
 
 function handleCardClick(cardImage, cardName) {
   const imagePopupItem = new PopupWithImage(popupImageContainer);

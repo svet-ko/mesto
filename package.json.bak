@@ -1,0 +1,33 @@
+{
+  "name": "mesto",
+  "version": "0.0.1",
+  "description": "Проект - страница профиля приложения, созданная для отработки современной адаптивной вёрстки (с использованием гридов, флексбоксов, форм и анимаций) и Javascript, в том числе взаимодействие с DOM-деревом и обработчиками событий. На данный момент в приложении реализована возможность редактировать данные о пользователе, добавлять собственные фотографии и описание к ним, а также ставить лайки.",
+  "main": "index.js",
+  "scripts": {
+    "build": "rm -rf dist && webpack --mode production",
+    "dev": "webpack serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/svet-ko/mesto.git"
+  },
+  "author": "Sveta Korneeva",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/svet-ko/mesto/issues"
+  },
+  "homepage": "https://github.com/svet-ko/mesto#readme",
+  "devDependencies": {
+    "@babel/core": "^7.17.9",
+    "@babel/preset-env": "^7.16.11",
+    "babel-loader": "^8.2.5",
+    "clean-webpack-plugin": "^4.0.0",
+    "html-webpack-plugin": "^5.5.0",
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.8.1"
+  },
+  "dependencies": {
+    "core-js": "^3.22.3"
+  }
+}
