@@ -2,6 +2,7 @@ import { initialCards, validationStates, popupImageContainer } from './utils.js'
 import { FormValidator } from './FormValidator.js'
 import { Card } from './card.js'
 import PopupWithForm from './PopupWithForm.js';
+import UserInfo from './UserInfo.js';
 
 const cardsContainer = document.querySelector('.elements__list');
 
@@ -10,8 +11,14 @@ const popupEdit = document.querySelector('.popup_type_edit');
 
 const elementTemplate = document.querySelector('#element-template');
 
+function handleCardClick(cardImage, cardName) {
+  const imagePopupItem = new PopupWithImage(popupImageContainer);
+  imagePopupItem.openPopup(cardImage, cardName);
+  imagePopupItem.setEventListeners();
+}
+
 function addElementToElementsList(element) {
-  const cardElement = new Card(elementTemplate, element);
+  const cardElement = new Card(elementTemplate, element, handleCardClick);
   cardsContainer.prepend(cardElement.getCard(popupImageContainer));
 }
 
@@ -19,27 +26,26 @@ function addElementsFromInitialArray() {
   initialCards.reverse().forEach((element) => addElementToElementsList(element));
 }
 
-const profileCloseButton = popupEdit.querySelector('.popup__close-button');
 const profileForm = popupEdit.querySelector('.form');
 const profileValidator = new FormValidator(validationStates, profileForm);
 profileValidator.enableValidation();
 const nameInput = profileForm.querySelector('.form__input_type_name');
 const aboutInput = profileForm.querySelector('.form__input_type_about');
 
-const profileName = document.querySelector('.profile__user-name');
-const profileAbout = document.querySelector('.profile__user-about');
 const editButton = document.querySelector('.profile__edit-button');
 
+const userInfoItem = new UserInfo({nameSelector: '.profile__user-name', aboutSelector: '.profile__user-about'});
+
 function putValue() {
-  nameInput.value = profileName.textContent;
-  aboutInput.value = profileAbout.textContent;
-};
+  const userProfile = userInfoItem.getUserInfo();
+  nameInput.value = userProfile.name;
+  aboutInput.value = userProfile.about;
+}
 
 function handleEditFormSubmit(evt, getInputs) {
   evt.preventDefault();
   const [name, about] = getInputs();
-  profileName.textContent = name.value;
-  profileAbout.textContent = about.value;
+  userInfoItem.setUserInfo({newName: name.value, newAbout: about.value});
 }
 
 const editPopupWithFormItem = new PopupWithForm(popupEdit, handleEditFormSubmit);
@@ -47,32 +53,29 @@ editPopupWithFormItem.setEventListeners();
 editButton.addEventListener('click', () => {editPopupWithFormItem.openPopup(); putValue();});
 
 
-const placePopupCloseButton = popupAddPlace.querySelector('.popup__close-button');
 const cardForm = popupAddPlace.querySelector('.form');
 const cardValidator = new FormValidator(validationStates, cardForm);
 cardValidator.enableValidation();
-const placeInput = cardForm.querySelector('.form__input_type_place');
-const urlInput = cardForm.querySelector('.form__input_type_url');
 
 const plusButton = document.querySelector('.profile__add-button');
 
-function createElement() {
+function createElement(getInputs) {
+  const [name, link] = getInputs();
   const element = {};
-  element.name = placeInput.value;
-  element.link = urlInput.value;
+  element.name = name.value;
+  element.link = link.value;
   return element;
 }
 
-function handleCardFormSubmit(evt) {
+function handleCardFormSubmit(evt, getInputs) {
   evt.preventDefault();
-  const newElement = createElement();
+  const newElement = createElement(getInputs);
   addElementToElementsList(newElement);
 }
 
-//plusButton.addEventListener('click', () => {cardValidator.enableValidation(); openPopup(popupAddPlace)});
-//placePopupCloseButton.addEventListener('click', () => closePopup(popupAddPlace));
-//popupAddPlace.addEventListener('submit', (evt) => {handleCardFormSubmit(evt); closePopup(popupAddPlace)});
-//popupAddPlace.addEventListener('click', (evt) => closePopupByClickOnOverlay(evt));
+const placePopupWithFormItem = new PopupWithForm(popupAddPlace, handleCardFormSubmit);
+placePopupWithFormItem.setEventListeners();
+plusButton.addEventListener('click', () => {cardValidator.enableValidation(); placePopupWithFormItem.openPopup()});
 
 
 addElementsFromInitialArray();

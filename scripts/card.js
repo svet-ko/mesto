@@ -2,13 +2,14 @@ import { popupImageContainer } from './utils.js'
 import PopupWithImage from './PopupWithImage.js'
 
 class Card {
-  constructor(cardElementTemplate, element) {
+  constructor(cardElementTemplate, element, handleCardClick) {
     this._cardTemplate = cardElementTemplate.content;
     this._cardElement = this._cardTemplate.querySelector('.element').cloneNode(true);
     this._cardElementName = this._cardElement.querySelector('.element__name');
     this._cardElementImage = this._cardElement.querySelector('.element__image');
     this._likeButton = this._cardElement.querySelector('.element__like-button');
     this._trashButton = this._cardElement.querySelector('.element__delete-button');
+    this._clickCard = handleCardClick;
 
     this._cardElementName.textContent = element.name;
     this._cardElementImage.src = element.link;
@@ -26,9 +27,7 @@ class Card {
 
   _addCardPopupOpener() {
     this._cardElementImage.addEventListener('click', () => {
-      const imagePopupItem = new PopupWithImage(popupImageContainer);
-      imagePopupItem.openPopup(this._cardElementImage, this._cardElementName);
-      imagePopupItem.setEventListeners();
+      this._clickCard(this._cardElementImage, this._cardElementName);
   });
   }
 
