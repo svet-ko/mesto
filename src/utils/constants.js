@@ -1,9 +1,9 @@
-const pavlovsk = new URL('../../images/tinified/element-pavlovsk_medium.jpg', import.meta.url);
-const oranienbaum = new URL('../../images/tinified/element-lomonosov-medium.jpg', import.meta.url);
-const kronstadt = new URL('../../images/tinified/element-kronshtadt.jpg', import.meta.url);
-const petergof = new URL('../../images/tinified/element-aleksandria-medium.jpg', import.meta.url);
-const gatchina = new URL('../../images/tinified/element-gatchina-medium.jpg', import.meta.url);
-const pushkin = new URL('../../images/tinified/element-pushkin-medium.jpg', import.meta.url);
+const pavlovsk = new URL('../images/tinified/element-pavlovsk_medium.jpg', import.meta.url);
+const oranienbaum = new URL('../images/tinified/element-lomonosov-medium.jpg', import.meta.url);
+const kronstadt = new URL('../images/tinified/element-kronshtadt.jpg', import.meta.url);
+const petergof = new URL('../images/tinified/element-aleksandria-medium.jpg', import.meta.url);
+const gatchina = new URL('../images/tinified/element-gatchina-medium.jpg', import.meta.url);
+const pushkin = new URL('../images/tinified/element-pushkin-medium.jpg', import.meta.url);
 
 const initialCards = [
   {
