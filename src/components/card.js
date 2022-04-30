@@ -1,5 +1,4 @@
-
-class Card {
+export default class Card {
   constructor(cardElementTemplate, element, handleCardClick) {
     this._cardTemplate = cardElementTemplate.content;
     this._cardElement = this._cardTemplate.querySelector('.element').cloneNode(true);
@@ -8,10 +7,6 @@ class Card {
     this._likeButton = this._cardElement.querySelector('.element__like-button');
     this._trashButton = this._cardElement.querySelector('.element__delete-button');
     this._clickCard = handleCardClick;
-
-    this._cardElementName.textContent = element.name;
-    this._cardElementImage.src = element.link;
-    this._cardElementImage.alt = `Картинка "${element.name}"`;
   }
 
   _toggleLike() {
@@ -20,7 +15,7 @@ class Card {
 
   _removeButtonHandler(evt) {
     this._cardElement.remove();
-    this._cardElement = '';
+    this._cardElement = null;
   }
 
   _addCardPopupOpener() {
@@ -35,11 +30,12 @@ class Card {
     this._trashButton.addEventListener('click', (evt) => this._removeButtonHandler(evt));
   }
 
-  getCard() {
+  getCard(element) {
+    this._cardElementName.textContent = element.name;
+    this._cardElementImage.src = element.link;
+    this._cardElementImage.alt = `Картинка "${element.name}"`;
     this._addCardEventListeners();
     return this._cardElement;
   }
 
 }
-
-export {Card}

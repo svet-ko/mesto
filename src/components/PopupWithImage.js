@@ -8,11 +8,9 @@ export default class PopupWithImage extends Popup {
   }
 
   openPopup(cardImage, cardName) {
-    this._popup.classList.add('popup_opened');
-    document.addEventListener('keydown', this._closeByEsc.bind(this));
-
-    this._popupImage.src = cardImage.src;
+     this._popupImage.src = cardImage.src;
     this._popupImage.alt = `Картинка "${cardName.textContent}"`;
     this._popupCaption.textContent = cardName.textContent;
+    super.openPopup();
   }
 }

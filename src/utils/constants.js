@@ -1,34 +1,34 @@
-const Pavlovsk = new URL('../images/tinified/element-pavlovsk_medium.jpg', import.meta.url);
-const Oranienbaum = new URL('../images/tinified/element-lomonosov-medium.jpg', import.meta.url);
-const Kronstadt = new URL('../images/tinified/element-kronshtadt.jpg', import.meta.url);
-const Petergof = new URL('../images/tinified/element-aleksandria-medium.jpg', import.meta.url);
-const Gatchina = new URL('../images/tinified/element-gatchina-medium.jpg', import.meta.url);
-const Pushkin = new URL('../images/tinified/element-pushkin-medium.jpg', import.meta.url);
+const pavlovsk = new URL('../../images/tinified/element-pavlovsk_medium.jpg', import.meta.url);
+const oranienbaum = new URL('../../images/tinified/element-lomonosov-medium.jpg', import.meta.url);
+const kronstadt = new URL('../../images/tinified/element-kronshtadt.jpg', import.meta.url);
+const petergof = new URL('../../images/tinified/element-aleksandria-medium.jpg', import.meta.url);
+const gatchina = new URL('../../images/tinified/element-gatchina-medium.jpg', import.meta.url);
+const pushkin = new URL('../../images/tinified/element-pushkin-medium.jpg', import.meta.url);
 
 const initialCards = [
   {
     name: 'Павловск',
-    link: Pavlovsk
+    link: pavlovsk
   },
   {
     name: 'Ораниенбаум',
-    link: Oranienbaum
+    link: oranienbaum
   },
   {
     name: 'Кронштадт',
-    link: Kronstadt
+    link: kronstadt
   },
   {
     name: 'Петергоф - парк Александрия',
-    link: Petergof
+    link: petergof
   },
   {
     name: 'Гатчина',
-    link: Gatchina
+    link: gatchina
   },
   {
     name: 'Пушкин',
-    link: Pushkin
+    link: pushkin
   },
 ];
 
@@ -48,7 +48,7 @@ const popupAddPlace = document.querySelector('.popup_type_add-place');
 const popupEdit = document.querySelector('.popup_type_edit');
 const popupImageContainer = document.querySelector('.popup_type_photo');
 
-const editButton = document.querySelector('.profile__edit-button');
+const userEditButton = document.querySelector('.profile__edit-button');
 const plusButton = document.querySelector('.profile__add-button');
 
-export { initialCards, validationStates, cardsContainer, elementTemplate, popupAddPlace, popupEdit, popupImageContainer, editButton, plusButton }
+export { initialCards, validationStates, cardsContainer, elementTemplate, popupAddPlace, popupEdit, popupImageContainer, userEditButton, plusButton }
