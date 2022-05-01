@@ -18,16 +18,13 @@ import UserInfo from '../components/UserInfo.js';
 import './index.css';
 
 const imagePopupItem = new PopupWithImage(popupImageContainer);
-const initialCardsSection = new Section({items: initialCards, renderer: addNewCard}, cardsContainer);
 const profileForm = popupEdit.querySelector('.form');
 const profileValidator = new FormValidator(validationStates, profileForm);
 const nameInput = profileForm.querySelector('.form__input_type_name');
 const aboutInput = profileForm.querySelector('.form__input_type_about');
 const userInfoItem = new UserInfo({nameSelector: '.profile__user-name', aboutSelector: '.profile__user-about'});
-const editPopupWithFormItem = new PopupWithForm(popupEdit, handleEditFormSubmit);
 const cardForm = popupAddPlace.querySelector('.form');
 const cardValidator = new FormValidator(validationStates, cardForm);
-const placePopupWithFormItem = new PopupWithForm(popupAddPlace, handleCardFormSubmit);
 
 
 function handleCardClick(cardImage, cardName) {
@@ -56,10 +53,10 @@ function handleEditFormSubmit(evt, getInputs) {
 }
 
 function createObjFromInputsData(getInputs) {
-  const InputData = getInputs();
+  const inputData = getInputs();
   const element = {};
-  element.name = InputData.place;
-  element.link = InputData.url;
+  element.name = inputData.place;
+  element.link = inputData.url;
   return element;
 }
 
@@ -68,6 +65,10 @@ function handleCardFormSubmit(evt, getInputs) {
   const newElement = createObjFromInputsData(getInputs);
   addNewCard(newElement);
 }
+
+const initialCardsSection = new Section({items: initialCards, renderer: addNewCard}, cardsContainer);
+const editPopupWithFormItem = new PopupWithForm(popupEdit, handleEditFormSubmit);
+const placePopupWithFormItem = new PopupWithForm(popupAddPlace, handleCardFormSubmit);
 
 initialCardsSection.renderItems();
 
@@ -78,5 +79,12 @@ imagePopupItem.setEventListeners();
 editPopupWithFormItem.setEventListeners();
 placePopupWithFormItem.setEventListeners();
 
-userEditButton.addEventListener('click', () => {putValue(); editPopupWithFormItem.openPopup();});
-plusButton.addEventListener('click', () => {cardValidator.enableValidation(); placePopupWithFormItem.openPopup()});
+userEditButton.addEventListener('click', () => {
+  putValue();
+  editPopupWithFormItem.openPopup();
+});
+
+plusButton.addEventListener('click', () => {
+  cardValidator.enableValidation();
+  placePopupWithFormItem.openPopup();
+});
