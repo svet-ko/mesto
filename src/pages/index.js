@@ -44,7 +44,6 @@ const avatarEditForm = popupEditAvatar.querySelector('.form');
 const avatarValidator = new FormValidator(validationStates, avatarEditForm);
 
 const confirmationPopup = new PopupWithConfirmation(popupConfirm);
-confirmationPopup.setEventListeners();
 
 
 function handleCardClick(cardImage, cardName) {
@@ -150,6 +149,14 @@ function handleAvatarEditFormSubmit(evt, getInputs) {
   .finally(this.renderLoading(false))
 }
 
+const editPopupWithFormItem = new PopupWithForm(popupEdit, handleEditFormSubmit);
+const placePopupWithFormItem = new PopupWithForm(popupAddPlace, handleCardFormSubmit);
+const avatarEditPopupWithFormItem = new PopupWithForm(popupEditAvatar, handleAvatarEditFormSubmit);
+
+const initialCardsSection = new Section({renderer: createCard}, cardsContainer);
+
+confirmationPopup.setEventListeners();
+
 apiInfo.getUserInfo()
 .then(user => {
   userInfoItem.setUserInfo(user);
@@ -160,8 +167,6 @@ apiInfo.getUserInfo()
   console.log(err);
 });
 
-const initialCardsSection = new Section({renderer: createCard}, cardsContainer);
-
 apiInfo.getInitialCards()
 .then(cards => {
   cards.reverse();
@@ -170,10 +175,6 @@ apiInfo.getInitialCards()
 .catch((err) => {
   console.log(err);
 });
-
-const editPopupWithFormItem = new PopupWithForm(popupEdit, handleEditFormSubmit);
-const placePopupWithFormItem = new PopupWithForm(popupAddPlace, handleCardFormSubmit);
-const avatarEditPopupWithFormItem = new PopupWithForm(popupEditAvatar, handleAvatarEditFormSubmit);
 
 profileValidator.enableValidation();
 cardValidator.enableValidation();
