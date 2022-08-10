@@ -10,6 +10,9 @@ import {
   userEditButton,
   plusButton,
   avatarEditButton,
+  profileForm,
+  nameInput,
+  aboutInput,
   host,
   headers
  } from '../utils/constants.js';
@@ -26,10 +29,8 @@ import './index.css';
 const apiInfo = new Api(host, headers);
 
 const imagePopupItem = new PopupWithImage(popupImageContainer);
-const profileForm = popupEdit.querySelector('.form');
 const profileValidator = new FormValidator(validationStates, profileForm);
-const nameInput = profileForm.querySelector('.form__input_type_name');
-const aboutInput = profileForm.querySelector('.form__input_type_about');
+
 
 const userInfoItem = new UserInfo({
   nameSelector: '.profile__user-name',
@@ -66,11 +67,23 @@ function handleTrashButtonClick(card) {
 }
 
 function handleLikeOnServer(cardId) {
-  return apiInfo.putCardLike(cardId);
+  return apiInfo.putCardLike(cardId)
+  .then(card => {
+    this.putLike(card.likes);
+  })
+  .catch((err) => {
+    console.log(err);
+  })
 }
 
 function removeLikeOnServer(cardId) {
-  return apiInfo.removeCardLike(cardId);
+  return apiInfo.removeCardLike(cardId)
+  .then(card => {
+    this.removeLike(card.likes);
+  })
+  .catch((err) => {
+    console.log(err);
+  })
 }
 
 function createCard(element) {
@@ -157,20 +170,19 @@ const initialCardsSection = new Section({renderer: createCard}, cardsContainer);
 
 confirmationPopup.setEventListeners();
 
-apiInfo.getUserInfo()
-.then(user => {
-  userInfoItem.setUserInfo(user);
-  userInfoItem.setUserAvatar(user);
-  userInfoItem.setUserId(user._id);
-})
-.catch((err) => {
-  console.log(err);
-});
+const initialUserInfo = apiInfo.getUserInfo();
+const initialCards = apiInfo.getInitialCards();
 
-apiInfo.getInitialCards()
-.then(cards => {
-  cards.reverse();
-  initialCardsSection.renderItems(cards);
+Promise.all([initialUserInfo, initialCards])
+.then((values) => {
+  const [userValues, cardsValues] = values;
+
+  userInfoItem.setUserInfo(userValues);
+  userInfoItem.setUserAvatar(userValues);
+  userInfoItem.setUserId(userValues._id);
+
+  cardsValues.reverse();
+  initialCardsSection.renderItems(cardsValues);
 })
 .catch((err) => {
   console.log(err);

@@ -1,10 +1,3 @@
-/*const pavlovsk = new URL('../images/tinified/element-pavlovsk_medium.jpg', import.meta.url);
-const oranienbaum = new URL('../images/tinified/element-lomonosov-medium.jpg', import.meta.url);
-const kronstadt = new URL('../images/tinified/element-kronshtadt.jpg', import.meta.url);
-const petergof = new URL('../images/tinified/element-aleksandria-medium.jpg', import.meta.url);
-const gatchina = new URL('../images/tinified/element-gatchina-medium.jpg', import.meta.url);
-const pushkin = new URL('../images/tinified/element-pushkin-medium.jpg', import.meta.url);*/
-
 const host = 'https://mesto.nomoreparties.co/v1/cohort-47';
 const headers = {
   authorization: 'c90390ff-d2c8-4a08-89e0-57975fd0d0b1',
@@ -29,6 +22,10 @@ const popupImageContainer = document.querySelector('.popup_type_photo');
 const popupConfirm = document.querySelector('.popup_type_remove-confirm');
 const popupEditAvatar = document.querySelector('.popup_type_edit-avatar');
 
+const profileForm = popupEdit.querySelector('.form');
+const nameInput = profileForm.querySelector('.form__input_type_name');
+const aboutInput = profileForm.querySelector('.form__input_type_about');
+
 const userEditButton = document.querySelector('.profile__edit-button');
 const plusButton = document.querySelector('.profile__add-button');
 const avatarEditButton = document.querySelector('.profile__avatar-overlay');
@@ -45,6 +42,9 @@ export {
         userEditButton,
         plusButton,
         avatarEditButton,
+        profileForm,
+        nameInput,
+        aboutInput,
         host,
         headers
       }

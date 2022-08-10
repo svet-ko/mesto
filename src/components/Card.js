@@ -23,16 +23,21 @@ export default class Card {
       this._cardId = element._id;
       this._cardOwnerId = element.owner._id;
       this._userId = userId;
-      this._isLiked = false;
       this._handleTrashButtonClick = handleTrashButtonClick;
   }
 
-  _putLike() {
+  _colorLike() {
     this._likeButton.classList.add('element__like-button_active');
   }
 
-  _removeLike() {
+  putLike(likes) {
+    this.colorLike();
+    this._cardElementLikeAmount.textContent = likes.length;
+  }
+
+  removeLike(likes) {
     this._likeButton.classList.remove('element__like-button_active');
+    this._cardElementLikeAmount.textContent = likes.length;
   }
 
   deleteCard() {
@@ -57,22 +62,11 @@ export default class Card {
 
     this._likeButton.addEventListener('click', () => {
       if (this._likeButton.classList.contains('element__like-button_active')) {
-        this._removeLikeOnServer(this._cardId)
-        .then((card) => {
-          this._removeLike();
-          this._cardElementLikeAmount.textContent = card.likes.length;
-          this._isLiked = false;
-        })
+        this._removeLikeOnServer(this._cardId);
       } else {
-        console.log(this._cardId);
-        this._handleLikeOnServer(this._cardId)
-        .then((card) => {
-          this._putLike();
-          this._cardElementLikeAmount.textContent = card.likes.length;
-          this._isLiked = true;
-        })
+        this._handleLikeOnServer(this._cardId);
       }
-    });
+    })
 
     this._handleTrashButton();
   }
@@ -95,13 +89,8 @@ export default class Card {
   }
 
   checkLike(likes) {
-    for (let i = 0; i < likes.length; i++) {
-      if (likes[i]._id === this._userId) {
-        this._putLike();
-        this._isLiked = true;
-        break;
-      }
-    }
+    if (likes.some((like) => like._id === this._userId)) {
+      this._colorLike();
+    };
   }
-
 }
