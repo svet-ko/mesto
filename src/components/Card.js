@@ -31,7 +31,7 @@ export default class Card {
   }
 
   putLike(likes) {
-    this.colorLike();
+    this._colorLike();
     this._cardElementLikeAmount.textContent = likes.length;
   }
 
