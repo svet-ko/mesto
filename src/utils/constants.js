@@ -11,33 +11,6 @@ const headers = {
   'Content-Type': 'application/json'
 };
 
-/*const initialCards = [
-  {
-    name: 'Павловск',
-    link: pavlovsk
-  },
-  {
-    name: 'Ораниенбаум',
-    link: oranienbaum
-  },
-  {
-    name: 'Кронштадт',
-    link: kronstadt
-  },
-  {
-    name: 'Петергоф - парк Александрия',
-    link: petergof
-  },
-  {
-    name: 'Гатчина',
-    link: gatchina
-  },
-  {
-    name: 'Пушкин',
-    link: pushkin
-  },
-];*/
-
 const validationStates = {
   formSelector: '.form',
   inputSelector: '.form__input',

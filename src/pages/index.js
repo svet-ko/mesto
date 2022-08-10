@@ -138,7 +138,7 @@ function handleAvatarEditFormSubmit(evt, getInputs) {
   evt.preventDefault();
   const newAvatar = getInputs();
   this.renderLoading(true);
-  apiInfo.updateUserAvatar(newAvatar.url)
+  apiInfo.updateUserAvatar(newAvatar.avatar)
   .then((avatar) => {
     userInfoItem.setUserAvatar(avatar);
     this.closePopup();
