@@ -1,13 +1,13 @@
-# Проект: Место
+# Project Mesto
 
-### Обзор
+### Review
 
-Проект - страница профиля приложения, созданная для отработки современной адаптивной вёрстки (с использованием гридов, флексбоксов, форм и анимаций) и Javascript, в том числе взаимодействие с DOM-деревом и обработчиками событий. На данный момент в приложении реализована возможность редактировать данные о пользователе, добавлять собственные фотографии и описание к ним, а также ставить лайки.
+Project - an application profile page created to work out modern adaptive layout (using grids, flexboxes, forms and animations) and Javascript, including interaction with the DOM tree and event handlers. At the moment, the application has the ability to edit user data, add your own photos and descriptions to them, as well as put likes.
 
 **Figma**
 
-* [Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
+* [Link to the Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
 
 **Github Pages**
 
-* [Ссылка на Github Pages](https://svet-ko.github.io/mesto/)
+* [Link to Github Pages](https://svet-ko.github.io/mesto/)
